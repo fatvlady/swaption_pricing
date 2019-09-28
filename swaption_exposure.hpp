@@ -119,12 +119,12 @@ auto setup(size_t paths, size_t grid_size, size_t ex_times_size, unsigned long s
 	return inputs_holder{ std::move(swap_exposure), std::move(sdf), std::move(ex_indices), maturity_index };
 }
 
-value_t cmp_lt(const value_t& left, const value_t& right, const value_t t, const value_t& f)
+auto cmp_lt(const value_t& left, const value_t& right, const value_t& t, const value_t& f)
 {
     return (left < right).select(t, f);
 }
 
-value_t cmp_lt(const value_t& left, double right, const value_t t, const value_t& f)
+auto cmp_lt(const value_t& left, double right, const value_t& t, const value_t& f)
 {
 	return (left < right).select(t, f);
 }
