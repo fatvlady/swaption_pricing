@@ -134,6 +134,12 @@ auto mean(const value_t& v)
     return v.sum() / v.size();
 }
 
+auto approximate(const value_t& w, const value_t& x, const value_t& y)
+{
+    // return approximate(w, x, y);
+    return y;
+}
+
 auto swaption_exposure(const std::vector<value_t>& swap_exposure, const std::vector<value_t>& sdf, const std::vector<int>& ex_indices, int maturity_index)
 {
     const int total_steps = swap_exposure.size(); // number of discretization points in paths.
@@ -160,7 +166,7 @@ auto swaption_exposure(const std::vector<value_t>& swap_exposure, const std::vec
         if (!!i)
         {
             value_t discounted_opt_price = current_option_slice * sdf[step + 1] / sdf[step];
-            current_option_slice = approximate(sdf[step], swap_exposure[step], discounted_opt_price, 5);
+            current_option_slice = approximate(sdf[step], swap_exposure[step], discounted_opt_price);
         }
 
         // If there are some exercise dates left and 
